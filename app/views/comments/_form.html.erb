@@ -1,21 +1,13 @@
-<%= form_with(model: [story, Comment.new], local: true) do |form| %>
-  <%= form.hidden_field :parent_comment_id, value: @story.id %>
-  <div class="card" id="usercomment">
-  <div class="card-body">
-  <div>
-    <%= form.label :user_name %>
+<%= form_with(model: [story, Comment.new], url: story_comments_path(story)) do |form| %>
+  <div class="field">
+    <%= form.label :user_name, 'Your Name' %>
     <%= form.text_field :user_name %>
   </div><br>
-  <div>
-    <%= form.label :content %>
+
+  <div class="field">
+    <%= form.label :content, 'Comment' %>
     <%= form.text_area :content %>
   </div><br>
-  <div>
-    <%= form.submit 'Post Comment' %>
-  </div>
-  </div>
-  </div>
+
+  <%= form.submit 'Post Comment' %>
 <% end %>
-
-
- 

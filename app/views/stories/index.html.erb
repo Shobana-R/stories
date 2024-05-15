@@ -2,9 +2,11 @@
 
 <% Story.all.each do |story| %>
   <div class="story">
-    <h2><%= link_to story.title, "stories/show?id=#{story.id}", :method => :get %></h2>
+    <h3><%= link_to story.title, "stories/show?id=#{story.id}", :method => :get %></h3>
     <p><%= truncate(strip_tags(story.description), length: 150) %></p>
     <p><small>Submitted <%= time_ago_in_words(story.created_at) %> ago by <%= name = (story.user_name ? story.user_name : "Anonymous") %></small></p>
-   <%# <p><%= link_to "Comments (\#{story.comments.count})", story_path(story) %></p>
+    <p class="infotext"> Upvotes: <%= likes = (story.upvotes ? story.upvotes: '0') %> &nbsp &nbsp
+    <%= link_to "Comments (#{story.comments.count})", story_path(story) %></p>
+    <hr>
   </div>
 <% end %>

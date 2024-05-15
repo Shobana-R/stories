@@ -1,11 +1,18 @@
 <div class="story">
-  <h1><%= link_to @story.title, @story.url,target: :_blank %></h1>
-  <p><%= @story.description %></p>
-  <p><small>Submitted <%= time_ago_in_words(@story.created_at) %> ago by <%= name = (@story.user_name ? @story.user_name : "Anonymous") %></small></p>
+<h1><%= link_to @story.title, @story.url,target: :_blank %></h1>
+<p><%= @story.description %></p>
+<p class="infotext"> Upvotes: <%= likes = (@story.upvotes ? @story.upvotes: '0') %> &nbsp &nbsp</p>
+<p><small>Submitted <%= time_ago_in_words(@story.created_at) %> ago by <%= name = (@story.user_name ? @story.user_name : "Anonymous") %></small></p>
+<%= render partial: 'comments/form', locals: { story: @story } %>
 </div>
+
+<% if @story.comments.empty? %>
+  <p>No comments yet. Be the first to comment!</p>
+<% else %>
 <h2>Comments</h2>
-<div id="comments">
-  <%= render @story.comments.where(parent_comment_id: nil) %>
-</div>
-
-
+  <div id="comments">
+    <ul>
+      <%= render partial: 'comments/comment', collection: @story.comments.where(parent_comment_id: nil), as: :comment %>
+    </ul>
+  </div>
+<% end %>
