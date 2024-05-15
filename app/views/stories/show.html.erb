@@ -1,0 +1,11 @@
+<div class="story">
+  <h1><%= link_to @story.title, @story.url,target: :_blank %></h1>
+  <p><%= @story.description %></p>
+  <p><small>Submitted <%= time_ago_in_words(@story.created_at) %> ago by <%= name = (@story.user_name ? @story.user_name : "Anonymous") %></small></p>
+</div>
+<h2>Comments</h2>
+<div id="comments">
+  <%= render @story.comments.where(parent_comment_id: nil) %>
+</div>
+
+

@@ -1,0 +1,21 @@
+<h1>Reply to Comment</h1>
+
+<p><%= @parent_comment.content %></p>
+
+<%= form_with(model: [@story, @comment], local: true) do |form| %>
+  <%= form.hidden_field :parent_comment_id, value: @parent_comment.id %>
+
+  <div class="field">
+    <%= form.label :user_name %>
+    <%= form.text_field :user_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Post Comment' %>
+  </div>
+<% end %>

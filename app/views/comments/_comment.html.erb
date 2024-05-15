@@ -1,0 +1,12 @@
+<li>
+  <%= comment.content %>
+  <p>Posted by <%= comment.user_name %></p>
+
+  <%= link_to 'Reply', reply_story_comment_path(comment.story, comment) %>
+
+  <ul>
+    <%= render partial: 'comments/comment', collection: comment.child_comments, as: :comment %>
+  </ul>
+</li>
+
+
